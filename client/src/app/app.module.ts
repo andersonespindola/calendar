@@ -5,6 +5,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarModule } from './calendar/calendar.module';
+import { EventModule } from './event/event.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { CalendarModule } from './calendar/calendar.module';
   imports: [
     BrowserModule,
     CalendarModule,
+    EventModule,
     AppRoutingModule,
     FullCalendarModule
   ],
