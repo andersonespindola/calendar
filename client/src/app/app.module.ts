@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EventComponent } from './event/event.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { NewEventComponent } from './new-event/new-event.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarService } from './calendar/calendar.service';
+import { CustomDatePipe } from './pipe/custom.datepipe';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -22,7 +25,10 @@ FullCalendarModule.registerPlugins([
   declarations: [
     AppComponent,
     EventComponent,
-    CalendarComponent
+    CalendarComponent,
+    NewEventComponent,
+    EditEventComponent,
+    CustomDatePipe
   ],
   imports: [
     CommonModule,
@@ -30,7 +36,8 @@ FullCalendarModule.registerPlugins([
     AppRoutingModule,
     FullCalendarModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ CalendarService ],
   bootstrap: [AppComponent]

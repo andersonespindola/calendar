@@ -5,6 +5,7 @@ import { CalendarService } from './calendar.service';
 import { Event } from '../event/event';
 
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -15,15 +16,15 @@ export class CalendarComponent implements OnInit{
 
   calendarService: CalendarService;
   list: Event[];
+  url = 'http://localhost:8080';
 
-  constructor(cs: CalendarService) {
+  constructor(cs: CalendarService, private router: Router) {
     this.calendarService = cs;
   }
 
   calendarOptions: CalendarOptions = {
     locale: 'pt-br',
     initialView: 'dayGridMonth',
-   // dateClick: this.handleDateClick.bind(this),
     eventBackgroundColor: '#40E0D0',
     headerToolbar: {
       left:   'prev,next',
@@ -36,27 +37,12 @@ export class CalendarComponent implements OnInit{
     },
     timeZone: 'UTC',
     firstDay: 1,
-    events: [
-      
-    ]
+    events: {url: this.url}
   };
 
   async ngOnInit() {
-    const arrayEvent = await this.calendarService.listarEventos().toPromise();
+    const arrayEvent = await this.calendarService.listEvents().toPromise();
     this.list = arrayEvent;
     console.log(this.list);
   }
-
- /* handleDateClick(arg) {
-  alert('date click! ' + arg.dateStr);
-  }*/
-
-/*let str = formatDate(new Date(), {
-  month: 'long',
-  year: 'numeric',
-  day: 'numeric'
-});
-
-console.log(str);*/
-
 }

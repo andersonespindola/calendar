@@ -1,1 +1,31 @@
-<p>event works!</p>
+<div class="container">
+    <div class="card list-car">
+        <h5 class="card-header">Lista de eventos</h5>
+        <div class="card-body">
+            <div>
+                <button type="button" id="botao1" class="btn btn-primary" (click)="newEvent()">Novo evento</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let l of lista">
+                        <td>{{l.description}}</td>
+                        <td>{{l.date | customDate}}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning btn-sm"
+                                (click)="editEvent(l.id)">Editar</button>
+                            <button type="button" class="btn btn-danger btn-sm ml-1"
+                                (click)="excludeEvent(l.id)">Deletar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

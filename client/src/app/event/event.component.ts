@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarService } from '../calendar/calendar.service';
+import { Event } from './event';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComponent implements OnInit {
 
-  constructor() { }
+  calendarService: CalendarService;
+  lista: Event[];
 
-  ngOnInit(): void {
+  constructor(cs: CalendarService, private router: Router) { 
+    this.calendarService = cs;
   }
 
+  async ngOnInit() {
+    const arrayEvent = await this.calendarService.listEvents().toPromise();
+    this.lista = arrayEvent;
+  }
+
+  excludeEvent(id: number) {
+    this.calendarService.excludeEvent(id.valueOf());
+    location.reload();
+  }
+
+  editEvent(id: number) {
+    this.router.navigate(['/' + id]);
+  }
+
+  newEvent() {
+    this.router.navigate(['/add']);
+  }
 }

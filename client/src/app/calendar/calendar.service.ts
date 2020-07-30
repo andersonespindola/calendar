@@ -13,7 +13,23 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
-  listarEventos() {
+  listEvents() {
     return this.http.get<Event[]>(this.URL);
+  }
+
+  addEvent(event: Event) {
+    return this.http.post<Event>(this.URL + '/add', event).subscribe();
+  }
+
+  excludeEvent(id: number) {
+    return this.http.delete(this.URL + '/' + id).subscribe();
+  }
+
+  editEvent(id: number, event: Event) {
+    return this.http.put<Event>(this.URL + '/edit/' + id, event).subscribe();
+  }
+
+  listDetails(id: number) {
+    return this.http.get<Event>(this.URL + '/' + id);
   }
 }
