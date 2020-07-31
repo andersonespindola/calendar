@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -50,9 +51,10 @@ public class EventController {
         eventService.save(event1);
         return ResponseEntity.ok(event1);
     }
+
     @Transactional
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Event> edit (@PathVariable Long id, @RequestBody EventEditForm event){
+    public ResponseEntity<Event> edit (@PathVariable Long id, @RequestBody EventEditForm event) throws ParseException {
         Optional<Event> optionalEvent = eventService.findEvent(id);
         if (optionalEvent.isPresent()){
             Event newEvent = event.edit(id, eventService);
