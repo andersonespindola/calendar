@@ -41,7 +41,7 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     NgxMaskModule
   ],
-  providers: [ CalendarService ],
+  providers: [CalendarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

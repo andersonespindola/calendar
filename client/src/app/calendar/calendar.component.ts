@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit{
+export class CalendarComponent implements OnInit {
 
   calendarService: CalendarService;
   list: Event[];
@@ -24,7 +24,7 @@ export class CalendarComponent implements OnInit{
     locale: 'pt-br',
     initialView: 'dayGridMonth',
     headerToolbar: {
-      left:   'prev,next',
+      left: 'prev,next',
       center: 'title',
       right: 'today'
     },
@@ -33,10 +33,10 @@ export class CalendarComponent implements OnInit{
     },
     timeZone: 'GMT',
     firstDay: 1,
-    events: {url: this.url},
+    events: { url: this.url },
     timeZoneParam: 'GMT',
     eventColor: '#40E0D0',
-    eventClick(info){
+    eventClick(info) {
       location.href = "http://localhost:4200/edit/" + info.event.id;
     }
   };

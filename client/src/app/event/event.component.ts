@@ -13,7 +13,7 @@ export class EventComponent implements OnInit {
   calendarService: CalendarService;
   lista: Event[];
 
-  constructor(cs: CalendarService, private router: Router) { 
+  constructor(cs: CalendarService, private router: Router) {
     this.calendarService = cs;
   }
 

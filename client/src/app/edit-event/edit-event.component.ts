@@ -18,7 +18,7 @@ export class EditEventComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private calendarService: CalendarService,
               private activatedRoute: ActivatedRoute, private router: Router) {
-    let event: Event = new Event();
+    const event: Event = new Event();
     this.createForm(event);
   }
 

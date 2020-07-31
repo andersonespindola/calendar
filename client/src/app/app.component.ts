@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
-  newEvent(){
+  newEvent() {
     this.router.navigate(['/newEvent']);
   }
 
-  listAllEvent(){
+  listAllEvent() {
     this.router.navigate(['/allEvents']);
   }
 }
