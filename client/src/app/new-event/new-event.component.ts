@@ -25,7 +25,7 @@ export class NewEventComponent implements OnInit {
 
   createForm(event: Event) {
     this.formEvent = this.formBuilder.group({
-      description: [event.description, Validators.required],
+      title: [event.title, Validators.required],
       date: [formatDate(event.date, 'dd/MM/yyyy HH:mm', 'pt-BR', 'UTC'), Validators.required]
     });
   }

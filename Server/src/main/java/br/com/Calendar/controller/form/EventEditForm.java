@@ -12,7 +12,7 @@ import java.util.TimeZone;
 @Setter
 public class EventEditForm {
 
-    private String description;
+    private String title;
     private String date;
 
     public Event edit(Long id, EventService eventService) throws ParseException {
@@ -22,7 +22,7 @@ public class EventEditForm {
         dataFormatada = formato.parse(this.date);
         Event event = eventService.getOne(id);
         event.setId(id);
-        event.setDescription(this.description);
+        event.setTitle(this.title);
         event.setDate(dataFormatada);
         return event;
     }

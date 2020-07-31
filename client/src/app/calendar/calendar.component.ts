@@ -23,19 +23,22 @@ export class CalendarComponent implements OnInit{
   calendarOptions: CalendarOptions = {
     locale: 'pt-br',
     initialView: 'dayGridMonth',
-    eventBackgroundColor: '#40E0D0',
     headerToolbar: {
       left:   'prev,next',
       center: 'title',
       right: 'today'
     },
-    editable: true,
     buttonText: {
       today: 'Mês atual'
     },
-    timeZone: 'UTC',
+    timeZone: 'GMT',
     firstDay: 1,
-    events: {url: this.url}
+    events: {url: this.url},
+    timeZoneParam: 'GMT',
+    eventColor: '#40E0D0',
+    eventClick(info){
+      location.href = "http://localhost:4200/edit/" + info.event.id;
+    }
   };
 
   async ngOnInit() {

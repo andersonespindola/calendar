@@ -12,7 +12,7 @@ import lombok.Setter;
 public class EventDto {
 
     private Long id;
-    private String description;
+    private String title;
     private String date;
 
 }

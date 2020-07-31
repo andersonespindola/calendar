@@ -47,7 +47,7 @@ public class EventController {
         dataFormatada = formato.parse(eventDto.getDate());
 
         event1.setDate(dataFormatada);
-        event1.setDescription(eventDto.getDescription());
+        event1.setTitle(eventDto.getTitle());
         eventService.save(event1);
         return ResponseEntity.ok(event1);
     }

@@ -33,14 +33,14 @@ export class EditEventComponent implements OnInit {
     }
     this.formEvent.patchValue({
       id: this.event.id,
-      description: this.event.description,
+      title: this.event.title,
       date: formatDate(this.event.date, 'dd/MM/yyyy HH:mm', 'pt-br', 'UTC')
     });
   }
 
   createForm(event: Event) {
     this.formEvent = this.formBuilder.group({
-      description: [event.description, Validators.required],
+      title: [event.title, Validators.required],
       date: [event.date, Validators.required]
     });
   }
