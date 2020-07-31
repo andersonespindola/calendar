@@ -48,7 +48,9 @@ export class EditEventComponent implements OnInit {
   onSubmit() {
     this.calendarService.editEvent(this.id, this.formEvent.value);
     this.router.navigate(['/allEvents']).then(rel =>
-      location.reload());;
+      location.reload()).then(() => {
+        window.location.reload();
+      });
   }
 
 }

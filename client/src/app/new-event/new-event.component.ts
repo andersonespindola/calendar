@@ -37,6 +37,8 @@ export class NewEventComponent implements OnInit {
 
   voltar() {
     this.router.navigate(['/allEvents']).then(rel =>
-    location.reload());
+    location.reload()).then(() => {
+      window.location.reload();
+    });
   }
 }
