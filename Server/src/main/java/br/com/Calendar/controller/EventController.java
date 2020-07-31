@@ -2,16 +2,19 @@ package br.com.Calendar.controller;
 
 import br.com.Calendar.controller.form.EventEditForm;
 import br.com.Calendar.domain.Event;
+import br.com.Calendar.dto.EventDto;
 import br.com.Calendar.service.EventService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
-import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 
 @RestController
 public class EventController {
@@ -28,13 +31,34 @@ public class EventController {
         return eventService.listEvents();
     }
 
+    @SneakyThrows
     @PostMapping("/add")
-    public ResponseEntity<Event> saveEvent(@RequestBody Event event) {
+    public ResponseEntity<Event> saveEvent(@RequestBody EventDto eventDto) {
         Event event1 = new Event();
-        event1.setDate(event.getDate());
-        event1.setDescription(event.getDescription());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        formato.setTimeZone(TimeZone.getTimeZone("BRT"));
+
+        String remocao = eventDto.getDate().replace("T", " ");
+        eventDto.setDate(remocao);
+
+
+        Date dataFormatada = new Date();
+        dataFormatada = formato.parse(eventDto.getDate());
+
+        event1.setDate(dataFormatada);
+        event1.setDescription(eventDto.getDescription());
         eventService.save(event1);
         return ResponseEntity.ok(event1);
+    }
+    @Transactional
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Event> edit (@PathVariable Long id, @RequestBody EventEditForm event){
+        Optional<Event> optionalEvent = eventService.findEvent(id);
+        if (optionalEvent.isPresent()){
+            Event newEvent = event.edit(id, eventService);
+            return ResponseEntity.ok(newEvent);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @Transactional
@@ -50,16 +74,6 @@ public class EventController {
         }
     }
 
-    @Transactional
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Event> edit (@PathVariable Long id, @RequestBody EventEditForm event){
-        Optional<Event> optionalEvent = eventService.findEvent(id);
-        if (optionalEvent.isPresent()){
-            Event newEvent = event.edit(id, eventService);
-            return ResponseEntity.ok(newEvent);
-        }
-        return ResponseEntity.notFound().build();
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Event> eventDetails(@PathVariable Long id){

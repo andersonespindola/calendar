@@ -15,6 +15,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarService } from './calendar/calendar.service';
 import { CustomDatePipe } from './pipe/custom.datepipe';
+import { NgxMaskModule } from 'ngx-mask';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -37,7 +38,8 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule
   ],
   providers: [ CalendarService ],
   bootstrap: [AppComponent]

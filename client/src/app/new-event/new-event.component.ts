@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CalendarService } from '../calendar/calendar.service';
 import { Router } from '@angular/router';
 import { Event } from '../event/event';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-new-event',
@@ -13,7 +14,8 @@ export class NewEventComponent implements OnInit {
 
   formEvent: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private calendarService: CalendarService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private calendarService: CalendarService,
+              private router: Router) { }
 
   ngOnInit() {
     const event: Event = new Event();
@@ -21,21 +23,19 @@ export class NewEventComponent implements OnInit {
     this.createForm(event);
   }
 
-  createForm(event: Event){
+  createForm(event: Event) {
     this.formEvent = this.formBuilder.group({
       description: [event.description, Validators.required],
-      date: [event.date, Validators.required]
+      date: [formatDate(event.date, 'dd/MM/yyyy HH:mm', 'pt-BR', 'UTC'), Validators.required]
     });
   }
 
   onSubmit() {
     this.calendarService.addEvent(this.formEvent.value);
-    this.formEvent.reset(this.ngOnInit());
     this.voltar();
   }
 
   voltar() {
     this.router.navigate(['/allEvents']);
   }
-
 }

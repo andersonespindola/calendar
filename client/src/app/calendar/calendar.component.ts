@@ -3,8 +3,6 @@ import { CalendarOptions } from '@fullcalendar/angular';
 
 import { CalendarService } from './calendar.service';
 import { Event } from '../event/event';
-
-import * as $ from 'jquery';
 import { Router } from '@angular/router';
 
 @Component({
@@ -43,6 +41,5 @@ export class CalendarComponent implements OnInit{
   async ngOnInit() {
     const arrayEvent = await this.calendarService.listEvents().toPromise();
     this.list = arrayEvent;
-    console.log(this.list);
   }
 }

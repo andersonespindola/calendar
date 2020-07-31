@@ -9,6 +9,6 @@ registerLocaleData(BR, 'pt-BR');
 })
 export class CustomDatePipe extends DatePipe implements PipeTransform {
     transform(value: any, args?: any): any {
-        return super.transform(value, "dd/MM/yyyy h:mm a", "UTC", "pt-BR");
+        return super.transform(value, "dd/MM/yyyy - HH:mm", "UTC", "pt-BR");
     }
 }

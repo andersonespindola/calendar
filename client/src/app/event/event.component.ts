@@ -24,14 +24,18 @@ export class EventComponent implements OnInit {
 
   excludeEvent(id: number) {
     this.calendarService.excludeEvent(id.valueOf());
-    location.reload();
+    this.reload();
   }
 
   editEvent(id: number) {
-    this.router.navigate(['/' + id]);
+    this.router.navigate(['/edit/' + id]);
   }
 
   newEvent() {
-    this.router.navigate(['/add']);
+    this.router.navigate(['/newEvent']);
+  }
+
+  reload() {
+    location.reload();
   }
 }
